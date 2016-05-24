@@ -48,14 +48,28 @@ get_header(); ?>
   <?php  } else { ?>
                        <a href="<?php echo get_permalink(); ?>"><?php the_post_thumbnail( 'homepage-blog-custom-size' );  ?></a>
 <?php } ?>        
-                     
+  <br clear="all" />   <br clear="all" />                 
 <?php
   $category = get_the_category();
-  $cat_tree = get_category_parents($category[0]->term_id, FALSE, ':', TRUE);
-  $top_cat = explode(":",$cat_tree);
+  foreach ($category as $termid) {
+      
+     if($termid->term_id != 3):
+         echo $termid->name." | ";
+         break;
+     endif;
+      
+  }
+ 
+ 
 
-  $parent = $top_cat[0];
-  echo $parent;
+if(strtotime(get_the_date('Y-m-d')) == strtotime(date('Y-m-d'))){
+    
+   echo human_time_diff( get_the_time('U'), current_time('timestamp') ) . ' ago';
+}
+else {
+     echo the_date('M j, Y');
+}
+ 
 ?>
 
                     	
