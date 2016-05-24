@@ -36,7 +36,11 @@ get_header(); ?>
                 <div class="row addpad no-padding">
                 
                     <?php rewind_posts(); ?>
-					<?php $my_query = new WP_Query('category_name=blog&showposts=3'); ?>
+					<?php $my_query = new WP_Query('category_name=blog&showposts=9'); 
+                                         $x = 1;
+                                        ?>
+                    
+                                       
 					<?php while ($my_query->have_posts()) : $my_query->the_post(); ?>
      
                     <div class="col-md-4 col-sm-4">
@@ -67,7 +71,7 @@ if(strtotime(get_the_date('Y-m-d')) == strtotime(date('Y-m-d'))){
    echo human_time_diff( get_the_time('U'), current_time('timestamp') ) . ' ago';
 }
 else {
-     echo the_date('M j, Y');
+    echo get_the_date('M j, Y');
 }
  
 ?>
@@ -78,72 +82,12 @@ else {
                         <div class="featured-excerpt"><?php //echo excerpt(20); ?>
                             <p class="more"><a href="<?php echo get_permalink(); ?>">more</a></p></div>
                     </div>
-                    
-					<?php endwhile; ?>
+                    <?php if($x%3 == 0) : echo '<br clear="all" />'; endif; ?>
+					<?php $x++; endwhile; ?>
                     
                 </div><!-- /row -->
                 
-                <div class="row addpad no-padding">
                 
-                    <?php $my_query = new WP_Query('category_name=blog&showposts=3&offset=3'); ?>
-					<?php while ($my_query->have_posts()) : $my_query->the_post(); ?>
-  
-                    <div class="col-md-4 col-sm-4">
-                         <?php  if (is_mobile()) { ?>
-                        
-                        <div class="featured-image-mobile"> <a href="<?php echo get_permalink(); ?>"><?php the_post_thumbnail( 'single-main-custom-size' );  ?></a></div>
-
-  <?php  } else { ?>
-<a href="<?php echo get_permalink(); ?>"><?php the_post_thumbnail( 'homepage-blog-custom-size' );  ?></a>
-<?php } ?>
-                       <?php
-  $category = get_the_category();
-  $cat_tree = get_category_parents($category[0]->term_id, FALSE, ':', TRUE);
-  $top_cat = explode(":",$cat_tree);
-
-  $parent = $top_cat[0];
-  echo $parent;
-?> 
-                        <h3><a href="<?php echo get_permalink(); ?>"><?php the_title() ;?></a></h3>
-                       <div class="featured-excerpt"> <?php echo excerpt(20); ?>
-                           <p class="more"><a href="<?php echo get_permalink(); ?>">more</a></p></div>
-                    </div>
-                    
-					<?php endwhile; ?>
-                       
-                </div><!-- /row -->
-                
-                <div class="row addpad no-padding">
-                    
-                    <?php $my_query = new WP_Query('category_name=blog&showposts=3&offset=6'); ?>
-					<?php while ($my_query->have_posts()) : $my_query->the_post(); ?>
-  
-                    <div class="col-md-4 col-sm-4">
-                         <?php  if (is_mobile()) { ?>
-                        
-                        <div class="featured-image-mobile"> <a href="<?php echo get_permalink(); ?>"><?php the_post_thumbnail( 'single-main-custom-size' );  ?></a></div>
-
-  <?php  } else { ?>
-<a href="<?php echo get_permalink(); ?>"><?php the_post_thumbnail( 'homepage-blog-custom-size' );  ?></a>
-<?php } ?>
-
-<?php
-  $category = get_the_category();
-  $cat_tree = get_category_parents($category[0]->term_id, FALSE, ':', TRUE);
-  $top_cat = explode(":",$cat_tree);
-
-  $parent = $top_cat[0];
-  echo $parent;
-?>
-                        
-                        <h3><a href="<?php echo get_permalink(); ?>"><?php the_title() ;?></a></h3>
-                        <div class="featured-excerpt"><?php echo excerpt(20); ?>
-                        <p class="more"><a href="<?php echo get_permalink(); ?>">more</a></p></div>
-                    </div>
-                    
-					<?php endwhile; ?>
-                    
-                </div><!-- /row -->
                 
                 
                 <!-- banner -->
