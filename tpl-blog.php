@@ -19,7 +19,24 @@ $blog_content_ads = mm_get_ads('blog', 'blog_content', 1);
 //die();
 
 
-get_header(); ?>  
+get_header();
+
+global $post;
+global $paged;
+$slug = get_post( $post )->post_name;
+
+?>  
+
+  <div class="widesliderfullbg"> 
+    <div class="wideslider"> 
+    <ul>
+	<?php $my_query = new WP_Query('category_name='.$slug.'&showposts=5'); ?>
+	<?php while ($my_query->have_posts()) : $my_query->the_post(); ?>
+    <li><a href="<?php echo get_permalink(); ?>"><?php the_post_thumbnail( 'page-featured-custom-size' );  ?></a></li>
+    <?php endwhile; ?>
+    </ul>
+    </div>
+    </div>
 
 <?php
 
@@ -60,9 +77,7 @@ $cookie_name = "ad_".$post->ID;
 					<?php rewind_posts(); ?>
 					<?php 
 					
-					global $post;
-					global $paged;
-					$slug = get_post( $post )->post_name;
+					
 					$i = 0;
 					
 					$my_query = new WP_Query('posts_per_page=12&category_name='.$slug.'&paged='.$paged); 
@@ -113,12 +128,39 @@ $cookie_name = "ad_".$post->ID;
                         <div class="featured-image-mobile"> <a href="<?php echo get_permalink(); ?>"><?php the_post_thumbnail( 'single-main-custom-size' );  ?></a></div>
 
   <?php  } else { ?>
+                        
+                         
+                        
                        <a href="<?php echo get_permalink(); ?>"><?php the_post_thumbnail( 'homepage-blog-custom-size' );  ?></a>
 <?php } ?>
                        
+                       <br clear="all" />   <br clear="all" />                 
+<?php
+  $category = get_the_category();
+  foreach ($category as $termid) {
+      
+     if($termid->term_id != 3):
+         echo "<span class='blog-cat-title'>".$termid->name."</span> | ";
+         break;
+     endif;
+      
+  }
+ 
+ 
+
+if(strtotime(get_the_date('Y-m-d')) == strtotime(date('Y-m-d'))){
+    
+   echo human_time_diff( get_the_time('U'), current_time('timestamp') ) . ' ago';
+}
+else {
+    echo get_the_date('M j, Y');
+}
+ 
+?>
+                       
                     <h3><a href="<?php echo get_permalink(); ?>"><?php the_title() ;?></a></h3>
                         <div class="featured-excerpt"> <?php // echo excerpt(20); ?>
-                            <p class="more"><a href="<?php echo get_permalink(); ?>">more</a></p></div>
+                            <p class="more"><a href="<?php echo get_permalink(); ?>">Read More</a></p></div>
                         <br>
                     </div>
                     

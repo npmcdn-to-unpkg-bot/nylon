@@ -1866,7 +1866,7 @@ body {
 
 
 
-	color:#2793C5;
+	color: #3498db;
 
 
 
@@ -3842,7 +3842,7 @@ legend { /*display:none;*/ font-family: 'Playfair Display SC', serif; color:#4e7
 
 
 
-.blog, .photos, .single-top {
+.photos, .single-top {
 
 
 
@@ -4576,13 +4576,11 @@ display: none;
 }
 
 
-
-
-
-
-
-
-
+.blog-cat-title {
+    
+    color: #F82F7D;
+    font-weight: bold;
+}
 
 
 

@@ -83,7 +83,7 @@ get_header(); ?>
 
                     
                     <div class="relatedposts">
-<h2 class="section-title">You might also like...</h2>
+
 <?php
     $orig_post = $post;
     global $post;
@@ -100,13 +100,16 @@ get_header(); ?>
     );
      
     $my_query = new wp_query( $args );
+    if($my_query->have_posts()):
  ?>
- 
+ <h2 class="section-title">You might also like...</h2>
  <div class="row">
  
  <?php
     while( $my_query->have_posts() ) {
     $my_query->the_post();
+    
+    
     ?>
      
     <div class="col-md-3 relatedthumb">
@@ -122,11 +125,11 @@ get_header(); ?>
           <h3><a href="<?php echo get_permalink(); ?>"><?php the_title() ;?></a></h3>
     </div>
      
-    <? 
+    <?php 
 	}
 	?>
 	</div>
-   <?php }
+   <?php endif; }
     $post = $orig_post;
     wp_reset_query();
     ?>

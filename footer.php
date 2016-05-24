@@ -86,8 +86,8 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
-<?php if ($GLOBALS["categoryname"] == 'Home') { ?>
-<script src="<?php bloginfo( 'template_directory' ); ?>/js/wideslider.js"></script><?php } ?> 	
+
+<script src="<?php bloginfo( 'template_directory' ); ?>/js/wideslider.js"></script>	
 <?php if ($GLOBALS["categoryname"] == 'Street Snap' or $GLOBALS["categoryname"] == 'The Magazine') { ?>
 <script src="<?php bloginfo( 'template_directory' ); ?>/js/jquery.fancybox.js"></script><?php } ?>
 <script language="javascript" type="text/javascript">		$(document).ready(function() {						<?php if ($GLOBALS["categoryname"] == 'Street Snap' or $GLOBALS["categoryname"] == 'The Magazine') { //appear if Street Snap ?>							$(".fancybox").fancybox({				beforeShow : function() {					var alt = this.element.find('img').attr('alt');										this.inner.find('img').attr('alt', alt);										this.title = alt;				},								helpers : {					title: {						type: 'inside',						position: 'bottom'					}				},				nextEffect: 'fade',				prevEffect: 'fade'			});						<?php } // if ($category[0]->cat_name <> 'Photos') ?> 					});			</script>

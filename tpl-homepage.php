@@ -58,7 +58,7 @@ get_header(); ?>
   foreach ($category as $termid) {
       
      if($termid->term_id != 3):
-         echo $termid->name." | ";
+         echo "<span class='blog-cat-title'>".$termid->name."</span> | ";
          break;
      endif;
       
@@ -80,7 +80,7 @@ else {
                         
                         <h3><a href="<?php echo get_permalink(); ?>"><?php the_title() ;?></a></h3>
                         <div class="featured-excerpt"><?php //echo excerpt(20); ?>
-                            <p class="more"><a href="<?php echo get_permalink(); ?>">more</a></p></div>
+                            <p class="more"><a href="<?php echo get_permalink(); ?>">Read More</a></p></div>
                     </div>
                     <?php if($x%3 == 0) : echo '<br clear="all" />'; endif; ?>
 					<?php $x++; endwhile; ?>
