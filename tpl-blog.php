@@ -57,7 +57,7 @@ if(get_field('ad_visibility')){
  }
  else { $ad_visibility = 3; }
  
-$cookie_name = "ad_".$post->ID;
+$cookie_name = "ad_".$post->ID.get_post_time('U', true);
 
 	?>
         
