@@ -1710,7 +1710,7 @@ body {
 
 
 
-	margin: 10px 0px 3px;
+	margin: 3px 0px 3px;
 
 
 
@@ -1726,7 +1726,7 @@ body {
 
 
 
-.single p {
+.single-post-content p {
 
 
 
@@ -1758,7 +1758,7 @@ body {
 
 
 
-.single ul, .single ol {
+.single-post-content ul, .single-post-content ol {
 
 
 
@@ -1774,7 +1774,7 @@ body {
 
 
 
-.single ul li, .single ol li {
+.single-post-content ul li, .single-post-content ol li {
 
 
 
@@ -2144,9 +2144,11 @@ body {
 
 	background-color:#0a0200;
 
-
+        position: relative;
 
 	width:100%!important;
+        
+        z-index: 9;
 
 
 
@@ -3726,7 +3728,7 @@ legend { /*display:none;*/ font-family: 'Playfair Display SC', serif; color:#4e7
 
 
 
-    .single {
+    .single-post-content {
 
 
 
@@ -3872,20 +3874,60 @@ legend { /*display:none;*/ font-family: 'Playfair Display SC', serif; color:#4e7
 
 }
 
+.ads-type1 {
+    min-height: 50px; border: 0px solid #000; margin-bottom: 20px; display: inline-block; width: 200px; left: -10px; margin-left: -200px; top: 630px;
+}
+.ads-type2 {
+    min-height: 50px; border: 0px solid #000; margin-bottom: 20px; display: inline-block; width: 200px; right: -10px;  margin-right: -200px;  top: 630px;
+}
+.ads-type1, .ads-type2 {
+
+position: absolute !important;
+
+    
+}
+
+
+    
+.ads-type1.fixed, .single .ads-type1 {
+    
+   position: fixed !important; 
+   margin-left: 0px !important; 
+   top: 0px !important;
+   max-height: 100%;
+overflow: hidden;
+    
+}
+
+.ads-type2.fixed, .single .ads-type2 {
+    
+   position: fixed !important;
+   margin-right: 0px !important; 
+   top: 0px !important;
+   max-height: 100%;
+overflow: hidden;
+    
+}
 
 
 
+
+@media screen and (max-width: 1024px) {
+    
+.ads-type1, .ads-type2 {
+
+    display: none;
+
+}
+    
+}
 
 
 
 @media screen and (max-width:960px) {
 
 
-.ads-type1, .ads-type2 {
 
-display: none;
-
-}
     
 
 
@@ -4466,7 +4508,7 @@ display: none;
 
 
 
-.single p {
+.single-post-content p {
 
     
 
@@ -4551,6 +4593,9 @@ display: none;
 }
 
 
+.col-md-4.col-sm-4 img, .col-md-3.col-sm-3.blogpost img {
+    margin: 20px auto 5px;
+}
 
 /* Related Posts */
 
@@ -4562,10 +4607,14 @@ display: none;
 	text-align:center;
 }
 
+.relatedthumb img {
+  margin-bottom: 10px;
+}
 
 .col-md-3.relatedthumb > h3 {
   font-size: 14px;
   line-height: 21px;
+  margin: 0 auto;
 }
 
 .col-md-3.relatedthumb > h3 a {
