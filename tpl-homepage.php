@@ -10,6 +10,12 @@
 global $categoryname;
 $categoryname = 'Home';
 
+ 
+global $left_ads;
+$left_ads = mm_get_ads('blog', 'left');
+$right_ads = mm_get_ads('blog', 'right');
+$blog_content_ads = mm_get_ads('blog', 'blog_content', 1);
+
 get_header(); ?>
 
     <div class="widesliderfullbg"> 
@@ -23,7 +29,28 @@ get_header(); ?>
     </div>
     </div>
         
-        
+    <?php
+
+ if(get_field('ad_content_link')){
+	 $content_link = get_field('ad_content_link');
+ }
+ else { $content_link = "#"; }
+ 
+ 
+if(get_field('ad_content')):	
+	
+	 $content_image = get_field('ad_content');
+						
+endif;
+ 
+if(get_field('ad_visibility')){
+	 $ad_visibility = get_field('ad_visibility');
+ }
+ else { $ad_visibility = 3; }
+ 
+$cookie_name = "ad_".$post->ID.get_post_time('U', true);
+
+	?>    
     <div class="container main-content">
     
         <div class="row">
@@ -52,7 +79,7 @@ get_header(); ?>
   <?php  } else { ?>
                        <a href="<?php echo get_permalink(); ?>"><?php the_post_thumbnail( 'homepage-blog-custom-size' );  ?></a>
 <?php } ?>        
-  <br clear="all" />   <br clear="all" />                 
+  <br clear="all" />                  
 <?php
   $category = get_the_category();
   foreach ($category as $termid) {

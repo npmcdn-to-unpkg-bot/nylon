@@ -57,7 +57,7 @@ if(get_field('ad_visibility')){
  }
  else { $ad_visibility = 3; }
  
-$cookie_name = "ad_".$post->ID;
+$cookie_name = "ad_".$post->ID.get_post_time('U', true);
 
 	?>
         
@@ -134,7 +134,7 @@ $cookie_name = "ad_".$post->ID;
                        <a href="<?php echo get_permalink(); ?>"><?php the_post_thumbnail( 'homepage-blog-custom-size' );  ?></a>
 <?php } ?>
                        
-                       <br clear="all" />   <br clear="all" />                 
+                       <br clear="all" />              
 <?php
   $category = get_the_category();
   foreach ($category as $termid) {
@@ -175,21 +175,12 @@ else {
                 </div><!-- /row --> 
                 
 
-                <?php if(!empty($blog_content_ads[$ads_rand])):
-                
-							$ads_item = $blog_content_ads[$ads_rand];
-							$full_img_url = wp_get_attachment_url(get_post_thumbnail_id($ads_item->ID));
-							$ads_link = get_post_meta( $ads_item->ID, 'ads_link' );
-							$ads_link = $ads_link[0];							
-
-                ?>
+                 
 					
-					<div class="adds-row" style="border:0px solid #000;min-height:100px;clear:both;text-align:center;">
-						<a href="<?php echo $ads_link; ?>"><img src="<?php echo $full_img_url; ?>" /></a>
-					</div>
-					<br /><br /><br />
+					 
+					 <br />
 					
-                <?php endif; ?>
+               
                 
                 
                 

@@ -71,7 +71,7 @@
 
 <div id="mobile-footer">
 
-<div class="col-md-12"> 
+<div class="col-md-12 hidden-md hidden-lg"> 
 
 <div class="socialbutton"><a href="http://www.facebook.com/nylonsg" target="_blank"><img src="<?php bloginfo( 'template_directory' ); ?>/img/facebook.png" width="40" height="40"></a></div> 
 <div class="socialbutton"><a href="http://www.twitter.com/nylonsg" target="_blank"><img src="<?php bloginfo( 'template_directory' ); ?>/img/twitter.png" width="41" height="40"></a></div>  
@@ -116,6 +116,20 @@ jQuery(window).scroll(function() {
   }    
   else { 	
   jQuery('.navpos .navigation, .main-logo').removeClass("fixed");  
+   }});
+   
+   
+   
+   
+   
+   
+   /* *  Fixed Add banners */
+jQuery(window).scroll(function() {     
+ if(jQuery(window).scrollTop() > 620) {		
+ jQuery('.ads-type2, .ads-type1').addClass( "fixed" ); 
+  }    
+  else { 	
+  jQuery('.ads-type2, .ads-type1').removeClass("fixed");  
    }});
 
 </script>
@@ -175,5 +189,24 @@ jQuery(document).ready(function () {
 			
 			
 });
-     
+
+
+/* Reload web page */
+
+var winWidth = jQuery(window).width();
+
+
+jQuery(window).resize(function(){
+	
+	var NewwinWidth = jQuery(window).width();
+    
+
+if(winWidth!=NewwinWidth)
+ 
+ {						   
+     window.location.href = window.location.href;
+ }
+
+}); 
+
 </script>  </body></html>

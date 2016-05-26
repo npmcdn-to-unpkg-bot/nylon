@@ -8,6 +8,29 @@
  */
 
 get_header(); ?>
+
+<?php
+
+ if(get_field('ad_content_link')){
+	 $content_link = get_field('ad_content_link');
+ }
+ else { $content_link = "#"; }
+ 
+ 
+if(get_field('ad_content')):	
+	
+	 $content_image = get_field('ad_content');
+						
+endif;
+ 
+if(get_field('ad_visibility')){
+	 $ad_visibility = get_field('ad_visibility');
+ }
+ else { $ad_visibility = 3; }
+ 
+$cookie_name = "ad_".$post->ID.get_post_time('U', true);
+
+	?>
  
     <div class="container main-content">
     
@@ -47,7 +70,7 @@ get_header(); ?>
             ?>   
             	
                 <div class="row">
-            		<div class="col-xs-12 single">
+            		<div class="col-xs-12 single-post-content">
                 
                     <div class="main-title">
 					<?php if(function_exists('bcn_display'))
@@ -64,6 +87,21 @@ get_header(); ?>
                     <?php the_content(); ?>
                     
                     <br>
+                    
+                       <?php
+				
+				
+						if($_COOKIE[$cookie_name] <= $ad_visibility) :	
+						if(!empty($content_image)):
+							
+					?>
+					 
+					<div class="adds-row" style="border:0px solid #000;min-height:100px;clear:both;text-align:center;">
+               
+						<a href="<?php echo $content_link; ?>"><img src="<?php echo $content_image; ?>" /></a>
+					</div>
+					 <br clear="all"/>
+					<?php  endif; endif; ?> 
                     
                     <div class="post-navs clearfix">
                 <div class="col-md-4 col-xs-4 text-left no-left-padding">
@@ -96,7 +134,8 @@ get_header(); ?>
     'tag__in' => $tag_ids,
     'post__not_in' => array($post->ID),
     'posts_per_page'=>4, // Number of related posts to display.
-    'caller_get_posts'=>1
+    'caller_get_posts'=>1,
+    'orderby' => 'rand'
     );
      
     $my_query = new wp_query( $args );
@@ -121,7 +160,28 @@ get_header(); ?>
   <?php  } else { ?>
                        <a href="<?php echo get_permalink(); ?>"><?php the_post_thumbnail( 'homepage-blog-custom-size' );  ?></a>
 <?php } ?>
-        
+        <?php
+  $category = get_the_category();
+  foreach ($category as $termid) {
+      
+     if($termid->term_id != 3):
+         echo "<span class='blog-cat-title'>".$termid->name."</span> | ";
+         break;
+     endif;
+      
+  }
+ 
+ 
+
+if(strtotime(get_the_date('Y-m-d')) == strtotime(date('Y-m-d'))){
+    
+   echo human_time_diff( get_the_time('U'), current_time('timestamp') ) . ' ago';
+}
+else {
+    echo get_the_date('M j, Y');
+}
+ 
+?>
           <h3><a href="<?php echo get_permalink(); ?>"><?php the_title() ;?></a></h3>
     </div>
      

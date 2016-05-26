@@ -96,14 +96,13 @@
 
 
 
-<body>
+<body <?php body_class( $class ); ?>> 
 
 
 
     <div class="container header"  style="position:relative;">
 
 <?php 
-
 		
 if(get_field('ad_visibility')){
 	 $ad_visibility = get_field('ad_visibility');
@@ -111,7 +110,7 @@ if(get_field('ad_visibility')){
  else { $ad_visibility = 3; }
  
  
- $cookie_name = "adv_".$post->ID;
+ $cookie_name = "ad_".$post->ID.get_post_time('U', true);
  
   if (!isset($_COOKIE[$cookie_name]))
     {
@@ -132,7 +131,7 @@ if($_COOKIE[$cookie_name] <= $ad_visibility) :
 
 		 if(get_field('ad_left')): ?>
 
-			<div class="ads-type1" style="min-height: 50px;border: 0px solid #000;margin-bottom: 20px;display: inline-block;width: 200px;position: absolute;left: -10px;margin-left: -200px;top: 0px;">
+			<div class="ads-type1">
          
 
 
@@ -177,7 +176,7 @@ $left_image = get_field('ad_left');
 
     	
 
-    	<div class="ads-type2" style="min-height: 50px;border: 0px solid #000;margin-bottom: 20px;display: inline-block;width: 200px;position: absolute;right: -10px;margin-right: -200px;top: 0px;">
+    	<div class="ads-type2">
 
 				<?php  
 
