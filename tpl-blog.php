@@ -123,7 +123,7 @@ $cookie_name = "ad_".$post->ID.get_post_time('U', true);
      
                     <div class="col-md-3 col-sm-3 blogpost">
                         
-                         <?php  if (is_mobile()) { ?>
+                        <div class="featured-image">  <?php  if (is_mobile()) { ?>
                         
                         <div class="featured-image-mobile"> <a href="<?php echo get_permalink(); ?>"><?php the_post_thumbnail( 'single-main-custom-size' );  ?></a></div>
 
@@ -131,10 +131,11 @@ $cookie_name = "ad_".$post->ID.get_post_time('U', true);
                         
                          
                         
-                       <a href="<?php echo get_permalink(); ?>"><?php the_post_thumbnail( 'homepage-blog-custom-size' );  ?></a>
+                       <a href="<?php echo get_permalink(); ?>"><?php the_post_thumbnail( 'page-photos-custom-size' );  ?></a>
 <?php } ?>
                        
-                       <br clear="all" />              
+                       <br clear="all" /> 
+                        <div class="cat-label">
 <?php
   $category = get_the_category();
   foreach ($category as $termid) {
@@ -156,7 +157,7 @@ else {
     echo get_the_date('M j, Y');
 }
  
-?>
+?></div></div>
                        
                     <h3><a href="<?php echo get_permalink(); ?>"><?php the_title() ;?></a></h3>
                         <div class="featured-excerpt"> <?php // echo excerpt(20); ?>

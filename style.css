@@ -1539,6 +1539,7 @@ body {
 
 
     max-width: 100%;
+    height: auto;
 
 
 
@@ -1866,7 +1867,7 @@ body {
 
 
 
-	color: #3498db;
+	color: #9e9e9e;
 
 
 
@@ -4600,7 +4601,7 @@ overflow: hidden;
 /* Related Posts */
 
 .relatedposts .section-title {
-	color: #F9216D;
+	color: #000000;
 	margin-bottom:30px;
 	text-transform:uppercase;
 	font-family: "Lato";
@@ -4624,10 +4625,23 @@ overflow: hidden;
 	font-family: "Lato";
 }
 
+.featured-image {
+    position: relative;
+}
+
+.cat-label {
+  background: rgba(0, 0, 0, 0.65) none repeat scroll 0 0;
+  bottom: 5px;
+  color: #ffffff;
+  font-size: 11px;
+  padding: 5px;
+  position: absolute;
+  width: 100%;
+}
 
 .blog-cat-title {
     
-    color: #F82F7D;
+/*    color: #F82F7D;*/
     font-weight: bold;
 }
 
