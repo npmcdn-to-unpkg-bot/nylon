@@ -72,7 +72,8 @@ $cookie_name = "ad_".$post->ID.get_post_time('U', true);
      
                     <div class="col-md-4 col-sm-4">
                         
-                        <div class="featured-image">  <?php  if (is_mobile()) { ?>
+                        <div class="featured-image">  <?php  if (is_mobile()) { /* This is for Mobile devices only */ ?>
+                            
                         
                         <div class="featured-image-mobile"> <a href="<?php echo get_permalink(); ?>"><?php the_post_thumbnail( 'single-main-custom-size' );  ?></a></div>
 
