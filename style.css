@@ -4213,7 +4213,7 @@ overflow: hidden;
 
 
 
-.featured-image-mobile, .full-width-image, .single-top .bigimage {
+.featured-image, .full-width-image, .single-top .bigimage {
 
 
 
@@ -4232,7 +4232,12 @@ overflow: hidden;
 }
 
 
+.cat-label {
+ 
+  padding: 5px 15px !important;
+  font-size: 13px !important;
 
+}
 
 
 
