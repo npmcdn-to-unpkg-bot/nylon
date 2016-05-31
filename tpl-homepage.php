@@ -75,12 +75,12 @@ $cookie_name = "ad_".$post->ID.get_post_time('U', true);
                         <div class="featured-image">  <?php  if (is_mobile()) { /* This is for Mobile devices only */ ?>
                             
                         
-                        <div class="featured-image-mobile"> <a href="<?php echo get_permalink(); ?>"><?php the_post_thumbnail( 'single-main-custom-size' );  ?></a></div>
+                        <a href="<?php echo get_permalink(); ?>"><?php the_post_thumbnail( 'single-main-custom-size' );  ?></a>
 
   <?php  } else { ?>
                        <a href="<?php echo get_permalink(); ?>"><?php the_post_thumbnail( 'page-photos-custom-size' );  ?></a>
 <?php } ?>        
-  <br clear="all" /> 
+ 
   <div class="cat-label">
 <?php
   $category = get_the_category();
