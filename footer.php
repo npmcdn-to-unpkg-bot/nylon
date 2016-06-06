@@ -1,15 +1,5 @@
    
-    <div class="container">
     
-    	<div class="row">
-            <div class="col-xs-12">
-            	<div class="footer-banner">
-            		<?php get_sidebar('bottombanner'); ?>
-                </div>
-            </div>   
-        </div>
-        
-    </div>
     
     <div class="footerfullbg">
     
