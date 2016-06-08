@@ -1,5 +1,15 @@
    
+    <div class="container">
     
+    	<div class="row">
+            <div class="col-xs-12">
+            	<div class="footer-banner">
+            		<?php get_sidebar('bottombanner'); ?>
+                </div>
+            </div>   
+        </div>
+        
+    </div>
     
     <div class="footerfullbg">
     
@@ -109,18 +119,7 @@ jQuery(window).scroll(function() {
    }});
    
    
-   
-   
-   
-   
-   /* *  Fixed Add banners */
-jQuery(window).scroll(function() {     
- if(jQuery(window).scrollTop() > 620) {		
- jQuery('.ads-type2, .ads-type1').addClass( "fixed" ); 
-  }    
-  else { 	
-  jQuery('.ads-type2, .ads-type1').removeClass("fixed");  
-   }});
+
 
 </script>
    
@@ -198,5 +197,80 @@ if(winWidth!=NewwinWidth)
  }
 
 }); 
+
+
+
+
+
+   
+   /* *  Fixed Add banners */
+//jQuery(window).scroll(function() {     
+// if(jQuery(window).scrollTop() > 620) {		
+// jQuery('.ads-type2, .ads-type1').addClass( "fixed" ); 
+//  }    
+//  else { 	
+//  jQuery('.ads-type2, .ads-type1').removeClass("fixed");  
+//   }});
+   
+
+
+if(jQuery(window).width() > 768) {
+
+
+
+ jQuery('.ads-type2, .ads-type1').waypoint(function(direction) {
+          if (direction === 'down') {
+              
+   jQuery('.ads-type2, .ads-type1').addClass( "fixed" );
+   jQuery('.gutter-container').css( {'position':'fixed'} );
+  }
+ 
+},{
+  offset:'0'
+});
+
+ jQuery('.ads-type2, .ads-type1').waypoint(function(direction) {
+          if (direction === 'up') {
+              
+   jQuery('.ads-type2, .ads-type1').removeClass( "fixed" );
+   jQuery('.gutter-container').css( {'position':'absolute', 'top': '0px'} );
+  }
+ 
+},{
+  offset:'0'
+});
+
+ jQuery('.footerfullbg').waypoint(function(direction) {
+          if (direction === 'down') {
+     var offset = jQuery("div.ads-type2").offset();   
+     var offtop= offset.top - 630;
+   jQuery('.ads-type2, .ads-type1').removeClass( "fixed" );
+   jQuery('.ads-type2, .ads-type1').addClass( "absolute" );
+   jQuery('.gutter-container').css( {'position':'absolute', 'top':offtop+'px'} );
+   //jQuery('.single .gutter-container').css( {'position':'absolute', 'top':'0px'} );
+   
+  }
+ 
+},{
+  offset:'99%'
+});
+
+
+jQuery('.footerfullbg').waypoint(function(direction) {
+          if (direction === 'up') {
+   jQuery('.ads-type2, .ads-type1').removeClass( "absolute" );
+   jQuery('.ads-type2, .ads-type1').addClass( "fixed" );
+   jQuery('.gutter-container').css( {'position':'fixed'} );
+   
+  }
+ 
+},{
+  offset:'99%'
+});
+
+
+
+}
+
 
 </script>  </body></html>

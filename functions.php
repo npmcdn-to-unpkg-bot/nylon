@@ -310,7 +310,10 @@ function my_scripts_enqueue() {
 
 
     wp_register_script( 'jquerycookie-js', get_stylesheet_directory_uri().'/js/jquery.cookie.js', array('jquery'), NULL, true );
-     wp_enqueue_script( 'jquerycookie-js' );
+    wp_enqueue_script( 'jquerycookie-js' );
+     
+    wp_enqueue_script( 'waypoints-js', get_stylesheet_directory_uri().'/waypoints/lib/jquery.waypoints.min.js', array('jquery'), NULL, true );
+    wp_enqueue_script( 'waypoints-shotcut-js', get_stylesheet_directory_uri().'/waypoints/lib/shortcuts/sticky.min.js', array('waypoints-js'), NULL, true );
 
 }
 

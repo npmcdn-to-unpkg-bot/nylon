@@ -98,9 +98,8 @@
 
 <body <?php body_class( $class ); ?>> 
 
-
-
-    <div class="container header"  style="position:relative;">
+    <div class="gutter-container">
+     <div class="container"  style="position:relative;">
 
 <?php 
 		
@@ -114,12 +113,12 @@ if(get_field('ad_visibility')){
  
   if (!isset($_COOKIE[$cookie_name]))
     {
-		setcookie($cookie_name, 1, time() + (86400 * 30), "/"); // 86400 = 1 day
+		setcookie($cookie_name, 1, time() + (86400 * 7), "/"); // 86400 = 1 day
 	}
 	else
 	{
 		
-		 setcookie($cookie_name, $_COOKIE[$cookie_name] + 1, time() + (86400 * 30), "/"); // 86400 = 1 day 
+		 setcookie($cookie_name, $_COOKIE[$cookie_name] + 1, time() + (86400 * 7), "/"); // 86400 = 1 day 
 	}
 					
 					
@@ -209,35 +208,12 @@ $left_image = get_field('ad_left');
     	</div>
 
     	<?php endif; endif;  ?>
+     </div>
+    </div>
 
+    <div class="container header"  style="position:relative;">
 
-		
-
-		
-
-		
-
-		
-
-		
-
-		
-
-		
-
-		
-
-		
-
-		
-
-		
-
-		
-
-		
-
-		
+	
 
     	
 
