@@ -233,7 +233,7 @@ if(jQuery(window).width() > 768) {
           if (direction === 'up') {
               
    jQuery('.ads-type2, .ads-type1').removeClass( "fixed" );
-   jQuery('.gutter-container').css( {'position':'absolute', 'top': '0px'} );
+   jQuery('.gutter-container, .single .gutter-container').css( {'position':'absolute', 'top': '0px'} );
   }
  
 },{
@@ -247,7 +247,7 @@ if(jQuery(window).width() > 768) {
    jQuery('.ads-type2, .ads-type1').removeClass( "fixed" );
    jQuery('.ads-type2, .ads-type1').addClass( "absolute" );
    jQuery('.gutter-container').css( {'position':'absolute', 'top':offtop+'px'} );
-   //jQuery('.single .gutter-container').css( {'position':'absolute', 'top':'0px'} );
+   jQuery('.single .gutter-container').css( {'position':'absolute', 'top':offset.top+'px', 'overflow':'hidden'} );
    
   }
  
@@ -260,8 +260,8 @@ jQuery('.footerfullbg').waypoint(function(direction) {
           if (direction === 'up') {
    jQuery('.ads-type2, .ads-type1').removeClass( "absolute" );
    jQuery('.ads-type2, .ads-type1').addClass( "fixed" );
-   jQuery('.gutter-container').css( {'position':'fixed'} );
-   
+   jQuery('.gutter-container, .single .gutter-container').css( {'position':'fixed'} );
+     
   }
  
 },{

@@ -3883,14 +3883,21 @@ legend { /*display:none;*/ font-family: 'Playfair Display SC', serif; color:#4e7
 }
 .ads-type1, .ads-type2 {
 
-position: absolute !important;
+position: absolute;
 
     
 }
 
 
+.single .ads-type1, .single .ads-type2 {
     
-.ads-type1.fixed, .single .ads-type1 {
+     top: 0px;
+    /* position: fixed; */
+    
+}
+
+    
+.ads-type1.fixed {
     
    position: fixed !important; 
    margin-left: 0px !important; 
@@ -3900,7 +3907,7 @@ overflow: hidden;
     
 }
 
-.ads-type2.fixed, .single .ads-type2 {
+.ads-type2.fixed {
     
    position: fixed !important;
    margin-right: 0px !important; 
