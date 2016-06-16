@@ -71,21 +71,29 @@ get_header(); ?>
                     <?php while ( have_posts() ) : the_post(); ?>  
                     <?php the_content(); ?>
                     <?php endwhile; ?>
- 
-				<script src="<?php bloginfo( 'template_directory' ); ?>/js/masonry.pkgd.min.js"></script>
                 
+                <script src="<?php bloginfo( 'template_directory' ); ?>/js/masonry.pkgd.min.js"></script>
+                <script src="https://npmcdn.com/imagesloaded@4.1/imagesloaded.pkgd.min.js"></script>
                 <script>
-                var container = document.querySelector('#masonry');
-                var msnry = new Masonry( container, {
-                  // options
-                  columnWidth: 215,
+         
+             
+
+var $grid = jQuery('#masonry').imagesLoaded( function() {
+  // init Masonry after all images have loaded
+  $grid.masonry({
+   // options
+ columnWidth: 215,
 				  gutter: 30,
 				  isFitWidth: false,
 				  isOriginLeft: true,
 				  isOriginTop: true,
                   itemSelector: '.masonryitem'
-                });
+  });
+});
+
 				</script>
+ 
+				
  
                 </div><!-- /row -->
                  
