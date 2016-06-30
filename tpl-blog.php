@@ -21,7 +21,29 @@ get_header();
 global $post;
 global $paged;
 $slug = get_post($post)->post_name;
-?>  
+ 
+if (get_field('ad_content_link')) {
+    $content_link = get_field('ad_content_link');
+} else {
+    $content_link = "#";
+}
+
+
+if (get_field('ad_content')):
+
+    echo $content_image = get_field('ad_content');
+
+endif;
+
+if (get_field('ad_visibility')) {
+    $ad_visibility = get_field('ad_visibility');
+} else {
+    $ad_visibility = 3;
+}
+
+$cookie_name = "ad_" . $post->ID . get_post_time('U', true);
+?>
+
 
 <div class="widesliderfullbg"> 
     <div class="wideslider"> 
@@ -34,28 +56,7 @@ $slug = get_post($post)->post_name;
     </div>
 </div>
 
-<?php
-if (get_field('ad_content_link')) {
-    $content_link = get_field('ad_content_link');
-} else {
-    $content_link = "#";
-}
 
-
-if (get_field('ad_content')):
-
-    $content_image = get_field('ad_content');
-
-endif;
-
-if (get_field('ad_visibility')) {
-    $ad_visibility = get_field('ad_visibility');
-} else {
-    $ad_visibility = 3;
-}
-
-$cookie_name = "ad_" . $post->ID . get_post_time('U', true);
-?>
 
 <div class="container main-content">
 
@@ -87,6 +88,7 @@ $cookie_name = "ad_" . $post->ID . get_post_time('U', true);
 
                             <?php
                             if ($_COOKIE[$cookie_name] <= $ad_visibility) :
+                            
                                 if (!empty($content_image)):
                                     ?>
 

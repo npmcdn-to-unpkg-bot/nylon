@@ -425,4 +425,6 @@ $cookie_name = "ad_" . $post->ID . get_post_time('U', true);
 
 </div>
 
+
+
 <?php get_footer(); ?>

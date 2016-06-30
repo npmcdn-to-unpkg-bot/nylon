@@ -281,7 +281,7 @@ if ($_COOKIE[$cookie_name] <= $ad_visibility) :
 
                 <div class="col-md-12 main-logo clearfix">
 
-                    <a href="/nylon/"><img src="<?php bloginfo('template_directory'); ?>/img/nylonlogo.png"></a>
+                    <a href="<?php echo site_url(); ?>"><img src="<?php bloginfo('template_directory'); ?>/img/nylonlogo.png"></a>
 
                 </div>
 
@@ -343,7 +343,7 @@ if ($_COOKIE[$cookie_name] <= $ad_visibility) :
 
                 <div class="col-md-12 main-logo clearfix">
 
-                    <a href="/nylon/"><img src="<?php bloginfo('template_directory'); ?>/img/nylonlogo.png"></a>
+                    <a href="<?php echo site_url(); ?>"><img src="<?php bloginfo('template_directory'); ?>/img/nylonlogo.png"></a>
 
                 </div>
 
