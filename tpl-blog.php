@@ -31,7 +31,7 @@ if (get_field('ad_content_link')) {
 
 if (get_field('ad_content')):
 
-    echo $content_image = get_field('ad_content');
+    $content_image = get_field('ad_content');
 
 endif;
 
