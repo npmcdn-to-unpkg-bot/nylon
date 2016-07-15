@@ -69,7 +69,7 @@ $cookie_name = "ad_" . $post->ID . get_post_time('U', true);
                 ?>
 
 
-<?php while ($my_query->have_posts()) : $my_query->the_post(); ?>
+                <?php while ($my_query->have_posts()) : $my_query->the_post(); ?>
 
                     <div class="col-md-4 col-sm-4">
 
@@ -80,7 +80,7 @@ $cookie_name = "ad_" . $post->ID . get_post_time('U', true);
 
                             <?php } else { ?>
                                 <a href="<?php echo get_permalink(); ?>"><?php the_post_thumbnail('page-photos-custom-size'); ?></a>
-    <?php } ?>        
+                            <?php } ?>        
 
                             <div class="cat-label">
                                 <?php
@@ -106,13 +106,29 @@ $cookie_name = "ad_" . $post->ID . get_post_time('U', true);
 
 
                         <h3><a href="<?php echo get_permalink(); ?>"><?php the_title(); ?></a></h3>
-                        <div class="featured-excerpt"><?php //echo excerpt(20);  ?>
+                        <div class="featured-excerpt"><?php //echo excerpt(20);                       ?>
                             <p class="more"><a href="<?php echo get_permalink(); ?>">Read More</a></p></div>
                     </div>
-    <?php if ($x % 3 == 0) : echo '<br clear="all" />';
-    endif; ?>
-                    <?php $x++;
-                endwhile; ?>
+                    <?php
+                    if ($x % 3 == 0) : echo '<br clear="all" />';
+                    endif;
+                    if (is_mobile()) {
+                        echo "<div class='row text-center'>";
+                        if($x == 3):
+                               dynamic_sidebar('side1banner-sidebar');  
+                        endif;
+                        if($x == 6):
+                               dynamic_sidebar('side2banner-sidebar');  
+                        endif;
+                        if($x == 9):
+                               dynamic_sidebar('side3banner-sidebar');  
+                        endif;
+                        echo "</div><br clear='all'/>";
+                    }
+
+                    $x++;
+                endwhile;
+                ?>
 
             </div><!-- /row -->
 
@@ -130,7 +146,7 @@ $cookie_name = "ad_" . $post->ID . get_post_time('U', true);
 
             <!-- steet snaps -->
             <div class="main-title-home streetsnap-title">
-                <img src="<?php bloginfo('template_directory'); ?>/img/titles/thelook.jpg" alt="the look">
+                <a href="<?php echo site_url(); ?>/the-look.html"><img src="<?php bloginfo('template_directory'); ?>/img/titles/thelook.jpg" alt="the look"></a>
             </div>
 
             <div class="country-title">
@@ -139,25 +155,27 @@ $cookie_name = "ad_" . $post->ID . get_post_time('U', true);
 
             <div class="row addpad">
 
-                <div class="col-md-6 col-sm-6 streetsnap-content">
+              
                     <?php rewind_posts(); ?>
                     <?php $my_query = new WP_Query('category_name=streetsnap&showposts=1&offset=0'); ?>
                     <?php while ($my_query->have_posts()) : $my_query->the_post(); ?>
 
 
                         <?php if (is_mobile()) { ?>
-
+ <div class="col-md-6 col-sm-6 streetsnap-content text-center">
                             <a href="<?php echo get_permalink(); ?>"><?php the_post_thumbnail('single-main-custom-size'); ?></a>
 
                         <?php } else { ?>
+                              <div class="col-md-6 col-sm-6 streetsnap-content text-center">
                             <a href="<?php echo get_permalink(29); ?>"><?php the_post_thumbnail('homepage-streetsnap-big-custom-size'); ?></a>
-                        <?php } ?>
+                        
+                                <?php } ?>
 
-
-
-                        <p><?php the_title(); ?><?php //echo get_post_meta(get_the_ID(), 'age', true);  ?></p>
+   <p><?php the_title(); ?><?php //echo get_post_meta(get_the_ID(), 'age', true);                       ?></p>
+ </div>
+                     
                     <?php endwhile; ?>
-                </div>
+               
 
                 <div class="col-md-6 col-sm-6 streetsnap-content">
 
@@ -166,15 +184,11 @@ $cookie_name = "ad_" . $post->ID . get_post_time('U', true);
                         <?php $my_query = new WP_Query('category_name=streetsnap&showposts=2&offset=1'); ?>
                         <?php while ($my_query->have_posts()) : $my_query->the_post(); ?>
 
-                            <div class="col-md-6 col-sm-6">
+                            <div class="col-md-6 col-sm-6 col-xs-6 text-center">
 
-                                <?php if (is_mobile()) { ?>
-
-                                    <a href="<?php echo get_permalink(); ?>"><?php the_post_thumbnail('single-main-custom-size'); ?></a>
-
-                                <?php } else { ?>
+                               
                                     <a href="<?php echo get_permalink(29); ?>"><?php the_post_thumbnail('homepage-streetsnap-small-custom-size'); ?></a>
-                                <?php } ?>
+                               
 
 
                                 <p><?php the_title(); ?></p>
@@ -184,20 +198,16 @@ $cookie_name = "ad_" . $post->ID . get_post_time('U', true);
 
                     </div><!-- /row -->
 
-                    <div class="row">
+                    <div class="row look-row-two">
 
                         <?php $my_query = new WP_Query('category_name=streetsnap&showposts=2&offset=3'); ?>
                         <?php while ($my_query->have_posts()) : $my_query->the_post(); ?>
 
-                            <div class="col-md-6 col-sm-6">
+                            <div class="col-md-6 col-sm-6 col-xs-6 text-center">
 
-                                <?php if (is_mobile()) { ?>
-
-                                    <a href="<?php echo get_permalink(); ?>"><?php the_post_thumbnail('single-main-custom-size'); ?></a>
-
-                                <?php } else { ?>
+                               
                                     <a href="<?php echo get_permalink(29); ?>"><?php the_post_thumbnail('homepage-streetsnap-small-custom-size'); ?></a>
-                                <?php } ?>
+                               
 
                                 <p><?php the_title(); ?></p>
                             </div>
@@ -309,7 +319,7 @@ $cookie_name = "ad_" . $post->ID . get_post_time('U', true);
 
             <!-- special features -->
             <div class="main-title-home">
-                <img src="<?php bloginfo('template_directory'); ?>/img/titles/specialfeatures.jpg" alt="special features">
+                <a href="<?php echo site_url(); ?>/special-features.html"><img src="<?php bloginfo('template_directory'); ?>/img/titles/specialfeatures.jpg" alt="special features"></a>
             </div>
 
             <?php rewind_posts(); ?>

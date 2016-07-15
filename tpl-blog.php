@@ -21,24 +21,39 @@ get_header();
 global $post;
 global $paged;
 $slug = get_post($post)->post_name;
- 
-if (get_field('ad_content_link')) {
-    $content_link = get_field('ad_content_link');
+
+if (get_field('ad_content_link1')) {
+    $content_link1 = get_field('ad_content_link1');
 } else {
-    $content_link = "#";
+    $content_link1 = "#";
 }
 
 
-if (get_field('ad_content')):
+if (get_field('ad_content1')):
 
-    $content_image = get_field('ad_content');
+    $content_image1 = get_field('ad_content1');
 
 endif;
+
+if (get_field('ad_content_link2')) {
+    $content_link2 = get_field('ad_content_link2');
+} else {
+    $content_link2 = "#";
+}
+
+
+if (get_field('ad_content2')):
+
+    $content_image2 = get_field('ad_content2');
+
+endif;
+
+
 
 if (get_field('ad_visibility')) {
     $ad_visibility = get_field('ad_visibility');
 } else {
-    $ad_visibility = 3;
+    $ad_visibility = 0;
 }
 
 $cookie_name = "ad_" . $post->ID . get_post_time('U', true);
@@ -87,17 +102,33 @@ $cookie_name = "ad_" . $post->ID . get_post_time('U', true);
 
 
                             <?php
-                            if ($_COOKIE[$cookie_name] <= $ad_visibility) :
-                            
-                                if (!empty($content_image)):
-                                    ?>
+                            if (($_COOKIE[$cookie_name] <= $ad_visibility)||($ad_visibility == 0)) :
 
-                                    <div class="adds-row" style="border:0px solid #000;min-height:100px;clear:both;text-align:center;">
+                                if ($i == 4) {
 
-                                        <a href="<?php echo $content_link; ?>"><img src="<?php echo $content_image; ?>" /></a>
-                                    </div>
+                                    if (!empty($content_image1)):
+                                        ?>
 
-                                <?php endif;
+                                        <div class="adds-row" style="border:0px solid #000;min-height:100px;clear:both;text-align:center;">
+
+                                            <a href="<?php echo $content_link1; ?>"><img src="<?php echo $content_image1; ?>" /></a>
+                                        </div>
+
+                                        <?php
+                                    endif;
+                                }
+                                else if ($i == 8) {
+                                    if (!empty($content_image2)):
+                                        ?>
+
+                                        <div class="adds-row" style="border:0px solid #000;min-height:100px;clear:both;text-align:center;">
+
+                                            <a href="<?php echo $content_link2; ?>"><img src="<?php echo $content_image2; ?>" /></a>
+                                        </div>
+
+                                        <?php
+                                    endif;
+                                }
                             endif;
                             ?> 
 
@@ -109,7 +140,7 @@ $cookie_name = "ad_" . $post->ID . get_post_time('U', true);
 
                         </div>
                         <div class="row addpad2 no-padding">
-        <?php endif; ?>                
+                        <?php endif; ?>                
 
                         <div class="col-md-3 col-sm-3 blogpost">
 
@@ -117,12 +148,12 @@ $cookie_name = "ad_" . $post->ID . get_post_time('U', true);
 
                                     <a href="<?php echo get_permalink(); ?>"><?php the_post_thumbnail('single-main-custom-size'); ?></a> 
 
-        <?php } else { ?>
+                                <?php } else { ?>
 
 
 
                                     <a href="<?php echo get_permalink(); ?>"><?php the_post_thumbnail('page-photos-custom-size'); ?></a>
-        <?php } ?>
+                                <?php } ?>
 
 
                                 <div class="cat-label">
@@ -147,7 +178,7 @@ $cookie_name = "ad_" . $post->ID . get_post_time('U', true);
                                     ?></div></div>
 
                             <h3><a href="<?php echo get_permalink(); ?>"><?php the_title(); ?></a></h3>
-                            <div class="featured-excerpt"> <?php // echo excerpt(20);  ?>
+                            <div class="featured-excerpt"> <?php // echo excerpt(20);                         ?>
                                 <p class="more"><a href="<?php echo get_permalink(); ?>">Read More</a></p></div>
                             <br>
                         </div>
@@ -158,7 +189,7 @@ $cookie_name = "ad_" . $post->ID . get_post_time('U', true);
 
                 <?php else: ?>
                     <p><?php _e('Sorry, no posts matched your criteria.'); ?></p>
-<?php endif; ?>
+                <?php endif; ?>
 
             </div><!-- /row --> 
 
@@ -172,7 +203,7 @@ $cookie_name = "ad_" . $post->ID . get_post_time('U', true);
 
 
 
-<?php if (function_exists('tw_pagination')) tw_pagination($my_query); ?>
+            <?php if (function_exists('tw_pagination')) tw_pagination($my_query); ?>
 
 
         </div><!-- /col-md-12 contents blog -->

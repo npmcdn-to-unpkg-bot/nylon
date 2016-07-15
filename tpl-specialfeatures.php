@@ -8,6 +8,17 @@
  */
 
 get_header(); ?>   
+
+<div class="widesliderfullbg"> 
+    <div class="wideslider"> 
+        <ul>
+            <?php $my_query = new WP_Query('category_name=' . $slug . '&showposts=5'); ?>
+            <?php while ($my_query->have_posts()) : $my_query->the_post(); ?>
+                <li><a href="<?php echo get_permalink(); ?>"><?php the_post_thumbnail('page-featured-custom-size'); ?></a></li>
+            <?php endwhile; ?>
+        </ul>
+    </div>
+</div>
         
     <div class="container main-content">
     
@@ -24,7 +35,7 @@ get_header(); ?>
 					
 					<?php rewind_posts(); ?>
 					<?php 
-					
+					$i =1;
 					global $post;
 					global $paged;
 					$slug = get_post( $post )->post_name;
@@ -52,7 +63,7 @@ get_header(); ?>
                             <p class="more"><a href="<?php echo get_permalink(); ?>">more</a></p></div>
                         <br>
                     </div>
-
+  <?php if ($i == 4 or $i == 8 or $i == 12) : echo '<br clear="all"/>'; endif; $i++; ?>
 					<?php endwhile; ?>
 
                 	<?php else: ?>

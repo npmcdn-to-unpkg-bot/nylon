@@ -36,7 +36,7 @@ $cookie_name = "ad_" . $post->ID . get_post_time('U', true);
 
     <div class="row">
         <div class="col-xs-12 single-top">
-
+  
 
             <?php while (have_posts()) : the_post(); ?>
 
@@ -67,6 +67,8 @@ $cookie_name = "ad_" . $post->ID . get_post_time('U', true);
     } // if ($category[0]->cat_name <> 'Photos')
     ?>   
 
+          
+            
                 <div class="row">
                     <div class="col-xs-12 single-post-content">
 

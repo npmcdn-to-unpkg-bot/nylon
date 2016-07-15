@@ -54,11 +54,11 @@
 
         <link rel="stylesheet" type="text/css" media="screen" href="<?php bloginfo('stylesheet_url'); ?>">
 
-<?php if ($GLOBALS["categoryname"] == 'Street Snap' or $GLOBALS["categoryname"] == 'The Magazine') { ?><link rel="stylesheet" type="text/css" href="<?php bloginfo('template_directory'); ?>/css/jquery.fancybox.css" media="screen" /><?php } ?> 
+        <?php if ($GLOBALS["categoryname"] == 'Street Snap' or $GLOBALS["categoryname"] == 'The Magazine') { ?><link rel="stylesheet" type="text/css" href="<?php bloginfo('template_directory'); ?>/css/jquery.fancybox.css" media="screen" /><?php } ?> 
 
         <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
 
-<?php // Loads HTML5 JavaScript file to add support for HTML5 elements in older IE versions.  ?>
+        <?php // Loads HTML5 JavaScript file to add support for HTML5 elements in older IE versions.  ?>
 
         <!--[if lt IE 9]>
         
@@ -66,7 +66,7 @@
         
         <![endif]-->
 
-<?php wp_head(); ?>
+        <?php wp_head(); ?>
 
         <script>
 
@@ -101,54 +101,104 @@
 
 
     <body <?php body_class($class); ?>> 
+        <?php
+        global $post;
+        $post_categories = wp_get_post_categories($post->ID);
+        $no_of_cat = sizeof($post_categories);
+
+        foreach ($post_categories as $c) {
+            if ($no_of_cat > 1) {
+                if (($c != 3) && ($c != 26)) {
+                    $term_id = $c;
+                    break;
+                }
+            } else {
+                $term_id = $c;
+            }
+        }
+        ?>
 
         <div class="gutter-container">
             <div class="container"  style="position:relative;">
 
-<?php
-if (get_field('ad_visibility')) {
-    $ad_visibility = get_field('ad_visibility');
-} else {
-    $ad_visibility = 3;
-}
+                <?php
+                if (get_field('ad_visibility')) {
+                    $ad_visibility = get_field('ad_visibility');
+                } else {
+                    $ad_visibility = 0;
+                }
 
 
-$cookie_name = "ad_" . $post->ID . get_post_time('U', true);
+                $cookie_name = "ad_" . $post->ID . get_post_time('U', true);
 
-if (!isset($_COOKIE[$cookie_name])) {
-    setcookie($cookie_name, 1, time() + (86400 * 7), "/"); // 86400 = 1 day
-} else {
+                if (!isset($_COOKIE[$cookie_name])) {
+                    setcookie($cookie_name, 1, time() + (86400 * 7), "/"); // 86400 = 1 day
+                } else {
 
-    setcookie($cookie_name, $_COOKIE[$cookie_name] + 1, time() + (86400 * 7), "/"); // 86400 = 1 day 
-}
-
-
-
+                    setcookie($cookie_name, $_COOKIE[$cookie_name] + 1, time() + (86400 * 7), "/"); // 86400 = 1 day 
+                }
 
 
 
-if ($_COOKIE[$cookie_name] <= $ad_visibility) :
 
-    if (get_field('ad_left')):
-        ?>
+
+                if (($_COOKIE[$cookie_name] <= $ad_visibility) || ($ad_visibility == 0)) :
+
+                    if (is_single()) {
+
+
+
+                        $left_image = get_field('ad_left', 'category_' . $term_id);
+
+
+                        /* Left Adv Image and link for single post */
+                        if (get_field('ad_left_link', 'category_' . $term_id)) {
+                            $left_link = get_field('ad_left_link', 'category_' . $term_id);
+                        } else {
+                            $left_link = "#";
+                        }
+
+
+                        /* Right Adv Image and link for single post */
+                        $right_image = get_field('ad_right', 'category_' . $term_id);
+                        if (get_field('ad_right_link', 'category_' . $term_id)) {
+                            $right_link = get_field('ad_right_link', 'category_' . $term_id);
+                        } else {
+                            $right_link = "#";
+                        }
+                    } else {
+
+                        /* Left Adv Image and link */
+                        $left_image = get_field('ad_left');
+                        if (get_field('ad_left_link')) {
+                            $left_link = get_field('ad_left_link');
+                        } else {
+                            $left_link = "#";
+                        }
+                        /* Right Adv Image and link */
+                        $right_image = get_field('ad_right');
+
+                        if (get_field('ad_right_link')) {
+                            $right_link = get_field('ad_right_link');
+                        } else {
+                            $right_link = "#";
+                        }
+                    }
+
+
+                    if (!empty($left_image)):
+                        ?>
 
                         <div class="ads-type1">
 
 
 
-        <?php
-        /* echo '<pre>';
-          print_r($left_ads);
-          echo '</pre>';
-         */
-        $left_image = get_field('ad_left');
-
-        if (get_field('ad_left_link')) {
-            $left_link = get_field('ad_left_link');
-        } else {
-            $left_link = "#";
-        }
-        ?>	
+                            <?php
+                            /* echo '<pre>';
+                              print_r($left_ads);
+                              echo '</pre>';
+                             */
+                            ?>	
 
                             <a href="<?php echo $left_link; ?>">
 
@@ -160,27 +210,19 @@ if ($_COOKIE[$cookie_name] <= $ad_visibility) :
 
                         </div>
 
-    <?php endif; ?>
+                    <?php endif; ?>
 
 
 
                     <?php
-                    if (get_field('ad_right')):
+                    if (!empty($right_image)):
                         ?>
 
 
 
                         <div class="ads-type2">
 
-                        <?php
-                        $right_image = get_field('ad_right');
 
-                        if (get_field('ad_right_link')) {
-                            $right_link = get_field('ad_right_link');
-                        } else {
-                            $right_link = "#";
-                        }
-                        ?>
 
 
 
@@ -194,8 +236,10 @@ if ($_COOKIE[$cookie_name] <= $ad_visibility) :
 
                         </div>
 
-                        <?php endif;
-                    endif; ?>
+                        <?php
+                    endif;
+                endif;
+                ?>
             </div>
         </div>
 
@@ -211,7 +255,7 @@ if ($_COOKIE[$cookie_name] <= $ad_visibility) :
 
                 <div class="col-md-8 topbanner">
 
-<?php get_sidebar('topbanner'); ?>
+                    <?php //get_sidebar('topbanner');   ?>
 
                 </div>
 
@@ -281,7 +325,7 @@ if ($_COOKIE[$cookie_name] <= $ad_visibility) :
 
                 <div class="col-md-12 main-logo clearfix">
 
-                    <a href="<?php echo site_url(); ?>"><img src="<?php bloginfo('template_directory'); ?>/img/nylonlogo.png"></a>
+                    <a href="/nylon/"><img src="<?php bloginfo('template_directory'); ?>/img/nylonlogo.png"></a>
 
                 </div>
 
@@ -297,7 +341,7 @@ if ($_COOKIE[$cookie_name] <= $ad_visibility) :
 
                         <div class="navigation">
 
-<?php wp_nav_menu(array('container' => '', 'theme_location' => 'site-menu', 'menu_class' => 'list-unstyled main-list')); ?>	
+                            <?php wp_nav_menu(array('container' => '', 'theme_location' => 'site-menu', 'menu_class' => 'list-unstyled main-list')); ?>	
 
 
 
@@ -339,14 +383,26 @@ if ($_COOKIE[$cookie_name] <= $ad_visibility) :
 
 
 
+
+
             <div class="row hidden-xs hidden-sm">
 
                 <div class="col-md-12 main-logo clearfix">
 
-                    <a href="<?php echo site_url(); ?>"><img src="<?php bloginfo('template_directory'); ?>/img/nylonlogo.png"></a>
+                    <a href="/nylon/"><img src="<?php bloginfo('template_directory'); ?>/img/nylonlogo.png"></a>
 
                 </div>
 
+            </div>
+
+
+
+            <div class="row hidden-lg hidden-md">
+                <div class="col-md-12">
+
+                    <?php dynamic_sidebar('topbanner-sidebar'); ?> 
+
+                </div> 
             </div>
 
 
