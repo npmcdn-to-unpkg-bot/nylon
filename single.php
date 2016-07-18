@@ -7,36 +7,15 @@
  * @since rightintention 1.0
  */
 get_header();
-?>
 
-<?php
-if (get_field('ad_content_link')) {
-    $content_link = get_field('ad_content_link');
-} else {
-    $content_link = "#";
-}
-
-
-if (get_field('ad_content')):
-
-    $content_image = get_field('ad_content');
-
-endif;
-
-if (get_field('ad_visibility')) {
-    $ad_visibility = get_field('ad_visibility');
-} else {
-    $ad_visibility = 3;
-}
-
-$cookie_name = "ad_" . $post->ID . get_post_time('U', true);
+global $ad_visibility, $bottom_image, $bottom_link;
 ?>
 
 <div class="container main-content">
 
     <div class="row">
         <div class="col-xs-12 single-top">
-  
+
 
             <?php while (have_posts()) : the_post(); ?>
 
@@ -63,54 +42,56 @@ $cookie_name = "ad_" . $post->ID . get_post_time('U', true);
 
                     </div>
 
-        <?php
-    } // if ($category[0]->cat_name <> 'Photos')
-    ?>   
+                    <?php
+                } // if ($category[0]->cat_name <> 'Photos')
+                ?>   
 
-          
-            
+
+
                 <div class="row">
                     <div class="col-xs-12 single-post-content">
 
                         <div class="main-title">
-    <?php
-    if (function_exists('bcn_display')) {
-        bcn_display();
-    }
-    ?></div>
+                            <?php
+                            if (function_exists('bcn_display')) {
+                                bcn_display();
+                            }
+                            ?></div>
 
                         <br>
 
-                        <?php if ($category[0]->cat_name <> 'Photos') { //remove this part if Photos  ?> 
+                        <?php if ($category[0]->cat_name <> 'Photos') { //remove this part if Photos   ?> 
                             <p><?php the_date(); ?></p>
-                        <?php } // if ($category[0]->cat_name <> 'Photos')  ?> 
+                        <?php } // if ($category[0]->cat_name <> 'Photos')   ?> 
 
                         <?php the_content(); ?>
 
                         <br>
 
                         <?php
-                        if ($_COOKIE[$cookie_name] <= $ad_visibility) :
-                            if (!empty($content_image)):
+                        if (($_COOKIE[$cookie_name] <= $ad_visibility) || ($ad_visibility == 0)) :
+                            if (!empty($bottom_image)):
                                 ?>
 
                                 <div class="adds-row" style="border:0px solid #000;min-height:100px;clear:both;text-align:center;">
 
-                                    <a href="<?php echo $content_link; ?>"><img src="<?php echo $content_image; ?>" /></a>
+                                    <a href="<?php echo $bottom_link; ?>"><img src="<?php echo $bottom_image; ?>" /></a>
                                 </div>
                                 <br clear="all"/>
-        <?php endif;
-    endif; ?> 
+                                <?php
+                            endif;
+                        endif;
+                        ?> 
 
                         <div class="post-navs clearfix">
                             <div class="col-md-4 col-xs-4 text-left no-left-padding">
-    <?php if (get_previous_post()) : ?><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/prev.svg" onerror="this.onerror=null; this.src='<?php echo get_stylesheet_directory_uri(); ?>/img/prev.png'" /> &nbsp; <?php previous_post_link('%link', 'Previous'); ?>
+                                <?php if (get_previous_post()) : ?><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/prev.svg" onerror="this.onerror=null; this.src='<?php echo get_stylesheet_directory_uri(); ?>/img/prev.png'" /> &nbsp; <?php previous_post_link('%link', 'Previous'); ?>
 
                                 <?php endif; ?>
                             </div>
                             <div class="col-md-4 col-xs-4 text-center"></div>
                             <div class="col-md-4 col-xs-4 text-right no-right-padding"><?php if (get_next_post()) : ?><?php next_post_link('%link', 'Next'); ?> &nbsp; <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/prev.svg" onerror="this.onerror=null; this.src='<?php echo get_stylesheet_directory_uri(); ?>/img/next.png'" />
-    <?php endif; ?>
+                                <?php endif; ?>
                             </div>
                         </div>
 
@@ -121,43 +102,43 @@ $cookie_name = "ad_" . $post->ID . get_post_time('U', true);
 
                         <div class="relatedposts">
 
-    <?php
-    $orig_post = $post;
-    global $post;
-    $tags = wp_get_post_tags($post->ID);
+                            <?php
+                            $orig_post = $post;
+                            global $post;
+                            $tags = wp_get_post_tags($post->ID);
 
-    if ($tags) {
-        $tag_ids = array();
-        foreach ($tags as $individual_tag)
-            $tag_ids[] = $individual_tag->term_id;
-        $args = array(
-            'tag__in' => $tag_ids,
-            'post__not_in' => array($post->ID),
-            'posts_per_page' => 4, // Number of related posts to display.
-            'caller_get_posts' => 1,
-            'orderby' => 'rand'
-        );
+                            if ($tags) {
+                                $tag_ids = array();
+                                foreach ($tags as $individual_tag)
+                                    $tag_ids[] = $individual_tag->term_id;
+                                $args = array(
+                                    'tag__in' => $tag_ids,
+                                    'post__not_in' => array($post->ID),
+                                    'posts_per_page' => 4, // Number of related posts to display.
+                                    'caller_get_posts' => 1,
+                                    'orderby' => 'rand'
+                                );
 
-        $my_query = new wp_query($args);
-        if ($my_query->have_posts()):
-            ?>
+                                $my_query = new wp_query($args);
+                                if ($my_query->have_posts()):
+                                    ?>
                                     <h2 class="section-title">You might also like...</h2>
                                     <div class="row">
 
-            <?php
-            while ($my_query->have_posts()) {
-                $my_query->the_post();
-                ?>
+                                        <?php
+                                        while ($my_query->have_posts()) {
+                                            $my_query->the_post();
+                                            ?>
 
                                             <div class="col-md-3 relatedthumb">
 
-                                            <?php if (is_mobile()) { ?>
+                                                <?php if (is_mobile()) { ?>
 
                                                     <div class="featured-image-mobile"> <a href="<?php echo get_permalink(); ?>"><?php the_post_thumbnail('single-main-custom-size'); ?></a></div>
 
                                                 <?php } else { ?>
                                                     <a href="<?php echo get_permalink(); ?>"><?php the_post_thumbnail('homepage-blog-custom-size'); ?></a>
-                <?php } ?>
+                                                <?php } ?>
                                                 <?php
                                                 $category = get_the_category();
                                                 foreach ($category as $termid) {
@@ -180,29 +161,29 @@ $cookie_name = "ad_" . $post->ID . get_post_time('U', true);
                                                 <h3><a href="<?php echo get_permalink(); ?>"><?php the_title(); ?></a></h3>
                                             </div>
 
-                                                <?php
-                                            }
-                                            ?>
+                                            <?php
+                                        }
+                                        ?>
                                     </div>
-        <?php
-        endif;
-    }
-    $post = $orig_post;
-    wp_reset_query();
-    ?>
+                                    <?php
+                                endif;
+                            }
+                            $post = $orig_post;
+                            wp_reset_query();
+                            ?>
                         </div>
 
                         <hr />
                         <br />
 
-    <?php
-    // If comments are open or we have at least one comment, load up the comment template.
-    if (comments_open() || get_comments_number()) {
-        comments_template();
-    }
-    ?>
+                        <?php
+                        // If comments are open or we have at least one comment, load up the comment template.
+                        if (comments_open() || get_comments_number()) {
+                            comments_template();
+                        }
+                        ?>
 
-                    <?php endwhile; // end of the loop. ?>
+                    <?php endwhile; // end of the loop.   ?>
 
 
                 </div><!-- /col-xs-12 -->    

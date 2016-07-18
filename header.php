@@ -122,10 +122,11 @@
             <div class="container"  style="position:relative;">
 
                 <?php
+                 global $ad_visibility, $bottom_image, $bottom_link, $cookie_name;
                 if (get_field('ad_visibility')) {
-                    $ad_visibility = get_field('ad_visibility');
+                     $ad_visibility = get_field('ad_visibility');
                 } else {
-                    $ad_visibility = 0;
+                     $ad_visibility = 0;
                 }
 
 
@@ -166,6 +167,18 @@
                         } else {
                             $right_link = "#";
                         }
+                        
+                        
+                          /* Bottom Adv Image and link for single post */
+                          $bottom_image = get_field('ads_bottom', 'category_' . $term_id);
+                        if (get_field('ads_bottom_link', 'category_' . $term_id)) {
+                             $bottom_link = get_field('ads_bottom_link', 'category_' . $term_id);
+                        } else {
+                             $bottom_link = "#";
+                        }
+                        
+                        
+                        
                     } else {
 
                         /* Left Adv Image and link */
