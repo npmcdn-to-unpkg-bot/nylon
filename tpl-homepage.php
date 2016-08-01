@@ -434,7 +434,14 @@ $cookie_name = "ad_" . $post->ID . get_post_time('U', true);
     </div>
 
 </div>
+ <?php if (is_mobile()) : ?>
+<div class="slideing-div" style="width: 300px; height: 250px; position:  fixed; right: -300px;  z-index:10;">
+    <?php dynamic_sidebar('video-sidebar'); ?>
+    <div class="close-btn" style="position: absolute; top:0px; right: 0; text-align: center; line-height: 20px; cursor: pointer;   width: 20px; height: 20px; color: #fff; background:#000;">X</div> 
+ 
+    
+</div>
 
-
+ <?php endif; ?>
 
 <?php get_footer(); ?>

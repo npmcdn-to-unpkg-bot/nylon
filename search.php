@@ -29,15 +29,49 @@ get_header(); ?>
                 </div>
                 <div class="row addpad2">
                 <?php endif; ?>  
+                    
+                    <div class="col-md-3 col-sm-3 blogpost">
+
+                            <div class="featured-image">  <?php if (is_mobile()) { ?>
+
+                                    <a href="<?php echo get_permalink(); ?>"><?php the_post_thumbnail('single-main-custom-size'); ?></a> 
+
+                                <?php } else { ?>
+
+
+
+                                    <a href="<?php echo get_permalink(); ?>"><?php the_post_thumbnail('page-photos-custom-size'); ?></a>
+                                <?php } ?>
+
+
+                                <div class="cat-label">
+                                    <?php
+                                    $category = get_the_category();
+                                    foreach ($category as $termid) {
+
+                                        if ($termid->term_id != 3):
+                                            echo "<span class='blog-cat-title'>" . $termid->name . "</span> | ";
+                                            break;
+                                        endif;
+                                    }
+
+
+
+                                    if (strtotime(get_the_date('Y-m-d')) == strtotime(date('Y-m-d'))) {
+
+                                        echo human_time_diff(get_the_time('U'), current_time('timestamp')) . ' ago';
+                                    } else {
+                                        echo get_the_date('M j, Y');
+                                    }
+                                    ?></div></div>
+
+                            <h3><a href="<?php echo get_permalink(); ?>"><?php the_title(); ?></a></h3>
+                            <div class="featured-excerpt"> <?php // echo excerpt(20);                         ?>
+                                <p class="more"><a href="<?php echo get_permalink(); ?>">Read More</a></p></div>
+                           
+                        </div>
      
-                    <div class="col-xs-3">
-                    	<a href="<?php echo get_permalink(); ?>"><?php the_post_thumbnail( 'homepage-blog-custom-size' );  ?></a>
-                        
-                        <h3><a href="<?php echo get_permalink(); ?>"><?php the_title() ;?></a></h3>
-                        <?php echo excerpt(15); ?>
-                        <p class="more"><a href="<?php echo get_permalink(); ?>">more</a></p>
-                        <br>
-                    </div>
+                    
                     
                     <?php $i++ ?>
 

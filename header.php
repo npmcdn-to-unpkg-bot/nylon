@@ -122,7 +122,7 @@
             <div class="container"  style="position:relative;">
 
                 <?php
-                 global $ad_visibility, $bottom_image, $bottom_link, $cookie_name;
+                global $ad_visibility, $bottom_image, $bottom_link, $cookie_name;
                 if (get_field('ad_visibility')) {
                      $ad_visibility = get_field('ad_visibility');
                 } else {
@@ -268,7 +268,7 @@
 
                 <div class="col-md-8 topbanner">
 
-                    <?php //get_sidebar('topbanner');   ?>
+                    <?php get_sidebar('topbanner');   ?>
 
                 </div>
 

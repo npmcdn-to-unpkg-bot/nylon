@@ -7,7 +7,12 @@
  * @since rightintention 1.0
  */
 get_header();
+global $post;
+global $paged;
+$slug = get_post($post)->post_name;
 ?>
+
+
 
 <div class="container main-content">
 
@@ -24,10 +29,7 @@ get_header();
 
                 <?php rewind_posts(); ?>
                 <?php
-                global $post;
-                global $paged;
-                $slug = get_post($post)->post_name;
-
+               
                 $my_query = new WP_Query('category_name=' . $slug . '&posts_per_page=12&paged=' . $paged);
                 ?>
                 <?php if ($my_query->have_posts()) : ?>

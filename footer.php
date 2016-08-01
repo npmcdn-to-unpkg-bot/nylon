@@ -80,13 +80,13 @@
 <?php if ($GLOBALS["categoryname"] == 'Street Snap' or $GLOBALS["categoryname"] == 'The Magazine') { ?>
     <script src="<?php bloginfo('template_directory'); ?>/js/jquery.fancybox.js"></script><?php } ?>
 <script language="javascript" type="text/javascript">		$(document).ready(function () {
-<?php if ($GLOBALS["categoryname"] == 'Street Snap' or $GLOBALS["categoryname"] == 'The Magazine') { //appear if Street Snap ?>							$(".fancybox").fancybox({beforeShow: function () {
+<?php if ($GLOBALS["categoryname"] == 'Street Snap' or $GLOBALS["categoryname"] == 'The Magazine') { //appear if Street Snap                 ?>							$(".fancybox").fancybox({beforeShow: function () {
                     var alt = this.element.find('img').attr('alt');
                     this.inner.find('img').attr('alt', alt);
                     this.title = alt;
                 }, helpers: {title: {type: 'inside', position: 'bottom'}}, nextEffect: 'fade', prevEffect: 'fade'});
-<?php } // if ($category[0]->cat_name <> 'Photos') ?>
-});</script>
+<?php } // if ($category[0]->cat_name <> 'Photos')                 ?>
+    });</script>
 
 <?php wp_footer(); ?>
 <?php if (is_front_page()): ?>
@@ -273,6 +273,43 @@
 
 
 
+
+
+
+    } else {
+        jQuery(document).ready(function () {
+
+            var winHeight = jQuery(window).height();
+            var middleHeight = winHeight / 2 - 125;
+
+            jQuery('.slideing-div').css({top: middleHeight + 'px'});
+        });
+
+
+
+        jQuery('.streetsnap-title').waypoint(function (direction) {
+            if (direction === 'down') {
+
+
+                var winWidth = jQuery(window).width();
+                var centerWidth = winWidth / 2 - 150;
+
+                jQuery('.slideing-div').animate({left: centerWidth + 'px'}, "slow");
+
+            }
+
+        }, {
+            offset: '99%'
+        });
+
+        jQuery('.close-btn').click(function () {
+            var winWidth = jQuery(window).width();
+            var hidenWidth = winWidth + 150;
+            jQuery('.slideing-div').animate({left: hidenWidth + 'px'}, "slow", function () {
+                // Animation complete.
+                jQuery('.slideing-div').hide();
+            });
+        });
     }
 
 

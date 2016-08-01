@@ -3891,7 +3891,7 @@ legend { /*display:none;*/ font-family: 'Playfair Display SC', serif; color:#4e7
 }
 
 
-.single .ads-type1, .single .ads-type2 {
+.single .ads-type1, .single .ads-type2, .page-id-23 .ads-type1, .page-id-23 .ads-type2, .page-id-18 .ads-type1, .page-id-18 .ads-type2, .page-id-29 .ads-type1, .page-id-29 .ads-type2 {
 
     top: 0px;
     /* position: fixed; */
@@ -4671,4 +4671,10 @@ legend { /*display:none;*/ font-family: 'Playfair Display SC', serif; color:#4e7
     
     margin-top:15px;
     
+}
+
+/* Search Page */
+
+.search-results .col-md-12.main-logo {
+  height: 100px;
 }
