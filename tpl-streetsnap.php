@@ -97,7 +97,7 @@ get_header();
 
 
                 <script src="<?php bloginfo('template_directory'); ?>/js/masonry.pkgd.min.js"></script>
-                <script src="https://npmcdn.com/imagesloaded@4.1/imagesloaded.pkgd.min.js"></script>
+                <script src="https://unpkg.com/imagesloaded@4.1/imagesloaded.pkgd.min.js"></script>
                 <script>
 //                var container = document.querySelector('#masonry');
 //                var msnry = new Masonry( container, {
